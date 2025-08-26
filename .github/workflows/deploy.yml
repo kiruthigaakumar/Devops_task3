@@ -28,8 +28,8 @@ jobs:
       # Step 4: Copy project files to EC2
       - name: Sync project files
         run: |
-          rsync -avz --exclude '.git*' -e "ssh -o StrictHostKeyChecking=no" ./Task3/node_app/ \
-            ${{ secrets.SSH_USERNAME }}@${{ secrets.EC2_PUBLIC_IP }}:~/app3/
+          rsync -avz --exclude '.git*' -e "ssh -o StrictHostKeyChecking=no" Task-3/node_app/ \
+            ${{ secrets.SSH_USERNAME }}@${{ secrets.EC2_PUBLIC_IP }}:~/app/
 
       # Step 5: Install Node.js, dependencies, and restart app with PM2
       - name: Restart Node.js App on EC2
@@ -47,7 +47,7 @@ jobs:
             fi
 
             # Navigate to app folder
-            cd ~/app3
+            cd ~/app
 
             # Kill old Node.js process if running
             pkill -f server.js || true
